@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>CatSocial</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">
+  <img src="assets/logo.png" alt="CatSocial Logo">
+</div>
+  <button class="post-btn">Publicar miau</button>
+</header>
+
+<main class="feed">
+
+  <article class="post verified creator">
+    <div class="avatar">😺</div>
+    <div class="content">
+      <div class="user">
+  <strong>Chente</strong>
+  <img class="badge" src="assets/admin.png" alt="Fundador">
+  <span class="role">Fundador</span>
+  <span class="handle">@chente</span>
+</div>
+      <p>Bienvenidos a CatSocial 🐾  
+      Una red social donde el humor y los gatos mandan.</p>
+      <div class="actions">
+        <span>💬 12</span>
+        <span>🔁 5</span>
+        <span>❤️ 42</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="post">
+    <div class="avatar">🐈</div>
+    <div class="content">
+      <div class="user">
+        <strong>MichiDev</strong>
+        <span class="handle">@michidev</span>
+      </div>
+      <p>Si tu código no compila, tal vez solo necesita una siesta 😴</p>
+      <div class="actions">
+        <span>💬 2</span>
+        <span>🔁 1</span>
+        <span>❤️ 9</span>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<script>
+  const user = JSON.parse(localStorage.getItem("catsocial_user"));
+
+  if (!user) {
+    window.location.href = "login.html";
+  }
+</script>
+
+</body>
+</html>

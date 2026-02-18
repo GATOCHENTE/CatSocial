@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar sesión · CatSocial</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+<div class="auth-container">
+  <img src="assets/logo.png" alt="CatSocial" class="auth-logo">
+
+  <h2>Inicia sesión en CatSocial</h2>
+
+<button onclick="loginWithGoogle()">Continuar con Google</button>
+<button onclick="loginWithGitHub()">Continuar con GitHub</button>
+
+<p style="margin: 12px 0; font-size: 13px;">──────── o ────────</p>
+
+  <form>
+    <input type="text" placeholder="@usuario o email" required>
+    <input type="password" placeholder="Contraseña" required>
+
+    <button type="submit">Entrar</button>
+  </form>
+
+  <p class="auth-link">
+    ¿No tienes cuenta?
+    <a href="register.html">Regístrate</a>
+  </p>
+</div>
+
+<script src="auth.js"></script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { 
+    getAuth, 
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    GithubAuthProvider,
+    signInWithPopup
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "TU_API_KEY",
+    authDomain: "TU_DOMINIO.firebaseapp.com",
+    projectId: "TU_PROJECT_ID",
+    appId: "TU_APP_ID"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const form = document.querySelector("form");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = form.querySelector("input[type='text']").value;
+    const password = form.querySelector("input[type='password']").value;
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      window.location.href = "index.html";
+    } catch (error) {
+      alert("Error al iniciar sesión");
+    }
+  });
+
+  // GOOGLE LOGIN
+  window.loginWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    await signInWithPopup(auth, provider);
+    window.location.href = "index.html";
+  };
+
+  // GITHUB LOGIN
+  window.loginWithGitHub = async () => {
+    const provider = new GithubAuthProvider();
+    await signInWithPopup(auth, provider);
+    window.location.href = "index.html";
+  };
+</script>
+
+</body>
+</html>
